@@ -27,7 +27,7 @@ def reshape(imgs_arr):
 
 
 def predict_image(path_images: str, labels, model_path = 'model'):
-    if model != "":
+    if model_path != "":
         model_path = model_path
     # Parameters
     input_size = (160,160)
@@ -41,7 +41,11 @@ def predict_image(path_images: str, labels, model_path = 'model'):
     X = preprocess(im,input_size)
     X = reshape([X])
     y = model.predict(X)
-    return labels[np.argmax(y)], np.max(y)
+    return {
+       "result": labels[np.argmax(y)],
+       "weighted": np.max(y)
+    }
 
 labels = ['daisy', 'dandelion', 'rose', 'sunflower', 'tulip']
-predict_image(sys.argv[1], labels, sys.argv[2])
+result = predict_image(sys.argv[1], labels, sys.argv[2])
+print(result)
