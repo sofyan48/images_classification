@@ -45,9 +45,7 @@ print('val size', len(df_te))
 print('test size', len(df_val))
 
 df_all = df_tr._append([df_te,df_val]).reset_index(drop=1)
-print('===================================================== \n')
 print(df_all.groupby(['set','tag']).size(),'\n')
-print('===================================================== \n')
 
 datasource_path = sys.argv[1]
 dataset_path = "dataset/"

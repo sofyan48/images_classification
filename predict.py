@@ -26,15 +26,15 @@ def reshape(imgs_arr):
     return np.stack(imgs_arr, axis=0)
 
 
-def predict_image(path_images: str, labels, model_path = 'model/model.h5'):
-    if model == "":
-        model = 'model/model.h5'
+def predict_image(path_images: str, labels, model_path = 'model'):
+    if model != "":
+        model_path = model_path
     # Parameters
     input_size = (160,160)
     #define input shape
     channel = (3,)
     input_shape = input_size + channel
-    MODEL_PATH = model_path
+    MODEL_PATH = model_path+'/model.h5'
     model = load_model(MODEL_PATH,compile=False, custom_objects={'FixedDropout': FixedDropout})
     # read image
     im = Image.open(path_images)

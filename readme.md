@@ -26,10 +26,6 @@ After prepare next create a dataset folder structure
 
 ## Train Dataset Folder
 ```
-python train.py 2  
-```
-with model folder path
-```
 python train.py 2  model_folder_name
 ```
 

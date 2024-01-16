@@ -20,7 +20,7 @@ def tf_data_generator(generator, input_shape):
     )
     return tf_generator
 
-def train_model(dataset_path: str, model_path: str, epoch: int):
+def train_model(dataset_path: str, epochTotal: int, model_path: str):
     # Define Input Parameters
     dim = (160, 160)
     # dim = (456, 456)
@@ -150,22 +150,21 @@ def train_model(dataset_path: str, model_path: str, epoch: int):
                 loss='categorical_crossentropy',
                 metrics=['accuracy'])
 
-    epochTotal = sys.argv[1]
-
     history = model.fit(x=train_data,
             steps_per_epoch=len(train_generator),
-            epochs=int(epoch),
+            epochs=int(epochTotal),
             validation_data=val_data,
             validation_steps=len(val_generator), 
             shuffle=True,
             verbose = 1)
 
-    MODEL_BASE_PATH = model_path
+    if model_path != "":
+        model_path = "model"
     SAVE_MODEL_NAME = "model.h5"
-    save_model_path = os.path.join(MODEL_BASE_PATH, SAVE_MODEL_NAME)
+    save_model_path = os.path.join(model_path, SAVE_MODEL_NAME)
 
-    if os.path.exists(os.path.join(MODEL_BASE_PATH)) == False:
-        os.makedirs(os.path.join(MODEL_BASE_PATH))
+    if os.path.exists(os.path.join(model_path)) == False:
+        os.makedirs(os.path.join(model_path))
         
     # print('Saving Model At {}...'.format(save_model_path))
     model.save(save_model_path,include_optimizer=False)   
@@ -192,5 +191,5 @@ def train_model(dataset_path: str, model_path: str, epoch: int):
         }
     }
     return result
-result = train_model("dataset", sys.argv[1], "model")
+result = train_model("dataset", sys.argv[1], sys.argv[2])
 print(result)
