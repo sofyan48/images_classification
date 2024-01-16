@@ -1,5 +1,5 @@
 # Image Clasifier
-##Create Image Structure in folder like this
+## Create Image Structure in folder like this
 ```
 ├── artist
 │   ├── ocha
