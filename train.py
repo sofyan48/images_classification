@@ -177,11 +177,11 @@ def train_model(dataset_path: str, epochTotal: int, model_path: str):
     result = {
         "label": labels,
         "train" : {
-            "losses" : loss,
+            "loss" : loss,
             "accuracy" : acc
         },
         "test" : {
-            "losses" : lossTest,
+            "loss" : lossTest,
             "accuracy" : accTest
         },
         "model_path": save_model_path,
